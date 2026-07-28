@@ -177,19 +177,23 @@ const loginUsuario = async (dados, contentType) => {
       if (dadosValidados === true) {
         let result = await usuarioDAO.loginUser(dados.email);
 
-        if (result.length > 0) {
-          const senhaCorreta = await bycrypt.compare(
-            dados.senha,
-            result[0].senha_hash,
-          );
+        if (result) {
+          if (result.length > 0) {
+            const senhaCorreta = await bycrypt.compare(
+              dados.senha,
+              result[0].senha_hash,
+            );
 
-          if (senhaCorreta) {
-            MESSAGE.HEADER.status_code = MESSAGE.SUCCESS_REQUEST.status_code;
-            delete result[0].senha_hash;
-            MESSAGE.HEADER.response = result;
-            return MESSAGE.HEADER;
+            if (senhaCorreta) {
+              MESSAGE.HEADER.status_code = MESSAGE.SUCCESS_REQUEST.status_code;
+              delete result[0].senha_hash;
+              MESSAGE.HEADER.response = result;
+              return MESSAGE.HEADER;
+            } else {
+              return MESSAGE.ERROR_PASSWORD;
+            }
           } else {
-            return MESSAGE.ERROR_PASSWORD;
+            return MESSAGE.ERROR_NOT_FOUND;
           }
         } else {
           return MESSAGE.ERROR_INTERNAL_SERVER_MODEL;
