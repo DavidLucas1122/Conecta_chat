@@ -63,6 +63,14 @@ const createUser = async (userData) => {
   }
 };
 
+const findByEmail = async (email) => {
+  return await db("tbl_usuario").where({ email }).first();
+};
+
+const findByNumero = async (numero) => {
+  return await db("tbl_usuario").where({ numero }).first();
+};
+
 const updateUser = async (id, userData) => {
   try {
     let result = await db("tbl_usuario")
@@ -114,6 +122,8 @@ module.exports = {
   getUserById,
   getSelectLastIdUsuario,
   createUser,
+  findByEmail,
+  findByNumero,
   updateUser,
   deleteUser,
   loginUser,

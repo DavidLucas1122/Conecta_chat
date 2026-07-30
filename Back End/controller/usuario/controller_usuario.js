@@ -66,6 +66,16 @@ const criarUsuario = async (usuario, contentType) => {
       let dadosValidados = await validacao.validarDadosUsuario(usuario);
 
       if (dadosValidados === true) {
+        const emailExiste = await usuarioDAO.findByEmail(usuario.email);
+        const numeroExiste = await usuarioDAO.findByNumero(usuario.numero);
+
+        if (emailExiste) {
+          return MESSAGE.ERROR_KEY_UNIQUES_EMAIL;
+        }
+        if (numeroExiste) {
+          return MESSAGE.ERROR_KEY_UNIQUES_NUMBER;
+        }
+
         const senha_hash = await bycrypt.hash(usuario.senha, 10);
         delete usuario.senha;
         usuario.senha_hash = senha_hash;

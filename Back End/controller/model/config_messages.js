@@ -55,6 +55,20 @@ const ERROR_PASSWORD = {
   message: "A senha enviada nao confere com a guardada no BANCO de DADOS!",
 };
 
+const ERROR_KEY_UNIQUES_EMAIL = {
+  status: false,
+  status_code: 409,
+  code: "EMAIL_ALREADY_EXISTS",
+  message: "Este e-mail já está cadastrado.",
+};
+
+const ERROR_KEY_UNIQUES_NUMBER = {
+  status: false,
+  status_code: 409,
+  code: "NUMBER_ALREADY_EXISTS",
+  message: "Este número de telefone já está cadastrado.",
+};
+
 /**************************  MENSAGENS DE SUCESSO DO PROJETO **********************************/
 const SUCCESS_REQUEST = {
   status: true,
