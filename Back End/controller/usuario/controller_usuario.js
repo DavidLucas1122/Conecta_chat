@@ -69,6 +69,8 @@ const criarUsuario = async (usuario, contentType) => {
         const emailExiste = await usuarioDAO.findByEmail(usuario.email);
         const numeroExiste = await usuarioDAO.findByNumero(usuario.numero);
 
+        console.log(emailExiste, numeroExiste);
+
         if (emailExiste) {
           return MESSAGE.ERROR_KEY_UNIQUES_EMAIL;
         }

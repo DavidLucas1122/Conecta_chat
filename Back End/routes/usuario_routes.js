@@ -32,6 +32,8 @@ router.post("/", cors(), bodyParserJson, async (req, res) => {
 
   let usuario = await controllerUsuario.criarUsuario(dadosBody, contentType);
 
+  console.log(usuario);
+
   res.status(usuario.status_code);
   res.json(usuario);
 });
