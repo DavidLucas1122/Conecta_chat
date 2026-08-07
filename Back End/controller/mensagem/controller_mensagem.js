@@ -10,26 +10,22 @@ const buscarMensagensConversa = async (idConversa) => {
     let result = await mensagemDAO.getMessagesByConversation(idConversa);
 
     if (result) {
-      if (result.length > 0) {
-        result.forEach((mensagem) => {
-          const data = new Date(mensagem.data_envio);
+      result.forEach((mensagem) => {
+        const data = new Date(mensagem.data_envio);
 
-          mensagem.data = data.toLocaleDateString("pt-BR");
-          mensagem.hora = data.toLocaleTimeString("pt-BR", {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-
-          delete mensagem.data_envio;
+        mensagem.data = data.toLocaleDateString("pt-BR");
+        mensagem.hora = data.toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
         });
 
-        MESSAGE.HEADER.status_code = MESSAGE.SUCCESS_REQUEST.status_code;
-        MESSAGE.HEADER.response = result;
+        delete mensagem.data_envio;
+      });
 
-        return MESSAGE.HEADER;
-      } else {
-        return MESSAGE.ERROR_NOT_FOUND;
-      }
+      MESSAGE.HEADER.status_code = MESSAGE.SUCCESS_REQUEST.status_code;
+      MESSAGE.HEADER.response = result;
+
+      return MESSAGE.HEADER;
     } else {
       return MESSAGE.ERROR_INTERNAL_SERVER_MODEL;
     }
