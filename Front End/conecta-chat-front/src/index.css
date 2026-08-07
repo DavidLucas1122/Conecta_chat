@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --color-blue-light: #1a73b8;
+  --color-blue-dark: #1e3f75;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-text-fill-color: inherit;
+  transition: background-color 9999s ease-in-out 0s;
+}
