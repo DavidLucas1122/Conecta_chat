@@ -24,6 +24,7 @@ const buscarMensagensConversa = async (idConversa) => {
 
       MESSAGE.HEADER.status_code = MESSAGE.SUCCESS_REQUEST.status_code;
       MESSAGE.HEADER.response = result;
+      MESSAGE.HEADER.idConversa = idConversa;
 
       return MESSAGE.HEADER;
     } else {
