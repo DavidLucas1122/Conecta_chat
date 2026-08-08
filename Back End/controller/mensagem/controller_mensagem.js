@@ -54,7 +54,7 @@ const criarMensagem = async (dados, contentType) => {
           const io = getIO();
 
           io.to(`conversa-${dados.id_conversa}`).emit(
-            "nova-mensagem",
+            "nova_mensagem",
             mensagemCriada,
           );
 

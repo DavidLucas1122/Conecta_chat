@@ -28,7 +28,7 @@ const getMessageById = async (id) => {
     let result = await db.select("*").from("tbl_mensagem").where("id", id);
 
     if (Array.isArray(result)) {
-      return result;
+      return result[0];
     } else {
       return false;
     }
