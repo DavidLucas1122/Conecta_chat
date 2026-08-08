@@ -51,6 +51,16 @@ const criarMensagem = async (dados, contentType) => {
           const mensagemCriada =
             await mensagemDAO.getMessageById(lastIdMensagem);
 
+          const data = new Date(mensagemCriada.data_envio);
+
+          mensagemCriada.data = data.toLocaleDateString("pt-BR");
+          mensagemCriada.hora = data.toLocaleTimeString("pt-BR", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+
+          delete mensagemCriada.data_envio;
+
           const io = getIO();
 
           io.to(`conversa-${dados.id_conversa}`).emit(
